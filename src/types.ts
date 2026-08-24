@@ -5,6 +5,8 @@ export type JobStatus =
   | "failed"
   | "refined";
 
+export type UserRole = "user" | "admin";
+
 export interface AuthUser {
   id?: string;
   username: string;
@@ -12,6 +14,17 @@ export interface AuthUser {
   githubUsername?: string;
   totalJobs?: number;
   successfulPRs?: number;
+}
+
+export interface AdminUser {
+  _id: string;
+  username: string;
+  email: string;
+  role: UserRole;
+  githubUsername?: string;
+  totalJobs?: number;
+  successfulPRs?: number;
+  createdAt: string;
 }
 
 export interface LocalUser extends AuthUser {
@@ -56,6 +69,7 @@ export interface Job {
   diff?: string;
   errorMessage?: string;
   refinements?: JobRefinement[];
+   userId?: string | { _id: string; username: string; email: string };
 }
 
 export interface Settings {
